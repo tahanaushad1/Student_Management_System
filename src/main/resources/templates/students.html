@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Student Management System</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<style>
+body {
+	background-color: #f8f9fa;
+}
+
+.navbar-brand {
+	font-weight: bold;
+}
+
+.container {
+	margin-top: 20px;
+}
+
+table.table {
+	background: #ffffff;
+	border-radius: 8px;
+}
+
+.table-hover tbody tr:hover {
+	background-color: #f1f1f1;
+}
+
+footer {
+	background: #343a40;
+	color: white;
+	text-align: center;
+	padding: 10px 0;
+	margin-top: 20px;
+}
+
+
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<a class="navbar-brand" href="#">Students Management System</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{students}">Manage
+						Students</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Settings</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container">
+		<h2 class="text-center my-4">Students List</h2>
+		<div class="row mb-3">
+			<div class="col-lg-3">
+				<a th:href="@{students/new}" class="btn btn-primary btn-sm">Add
+					Student</a>
+			</div>
+		</div>
+		<table class="table table-striped table-bordered table-hover">
+			<thead class="thead-dark">
+				<tr>
+					<th class="text-center">First Name</th>
+					<th class="text-center">Last Name</th>
+					<th class="text-center">Email</th>
+					<th class="text-center">Age</th>
+					<th class="text-center">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="student : ${students}">
+					<td th:text="${student.fName}"></td>
+					<td th:text="${student.lName}"></td>
+					<td th:text="${student.email}"></td>
+					<td th:text="${student.age}"></td>
+					<td class="text-center"><a
+						th:href="@{students/edit/{id}(id=${student.id})}"
+						class="btn btn-info btn-sm">Update</a> <a
+						th:href="@{students/{id}(id=${student.id})}"
+						class="btn btn-danger btn-sm"
+						onclick="return confirm('Are you sure you want to delete this student?');">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<footer> &copy; 2024 Student Management System. All rights
+		reserved. </footer>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"
+		integrity="sha384-pzjw8f+ua7Kw1TIqj1TZz5STVDBRIvFVPnA/ItWDcqCvBdwqro2oYZ93aC/uayVx"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFwz+O2O3b0vn5xczEoa9bUC9p6"
+		crossorigin="anonymous"></script>
+</body>
+</html>

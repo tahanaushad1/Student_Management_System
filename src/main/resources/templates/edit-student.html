@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Student Registration</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<style>
+/* Custom CSS */
+body {
+	background-color: #f8f9fa;
+}
+
+.container {
+	max-width: 600px;
+	background: #ffffff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+	font-family: 'Arial', sans-serif;
+	color: #343a40;
+}
+
+.btn-primary {
+	background-color: #007bff;
+	border-color: #007bff;
+}
+
+.btn-primary:hover {
+	background-color: #0056b3;
+	border-color: #0056b3;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" href="#">Student Management System</a>
+
+		<!-- Toggler/collapsible Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Navbar links -->
+		<ul class="navbar-nav">
+			<li class="nav-iteam"><a class="nav-link" th:href="@{/students}">Students
+					Management</a></li>
+		</ul>
+
+	</nav>
+
+	<div class="container mt-5">
+		<h1 class="text-center mb-4">Update Student Form</h1>
+		<form th:action="@{/students/edit/{id}(id=${student.id})}" th:object="${student}" method="post"
+			id="studentForm">
+			<div class="form-group">
+				<label for="fName">Student First Name</label> <input type="text"
+					th:field="*{fName}" id="fName" class="form-control"
+					placeholder="Enter First Name" required />
+			</div>
+			<div class="form-group">
+				<label for="lName">Student Last Name</label> <input type="text"
+					th:field="*{lName}" id="lName" class="form-control"
+					placeholder="Enter Last Name" required />
+			</div>
+			<div class="form-group">
+				<label for="email">Student Email Address</label> <input type="email"
+					th:field="*{email}" id="email" class="form-control"
+					placeholder="Enter Email Address" required />
+			</div>
+			<div class="form-group">
+				<label for="age">Student Age</label> <input type="number"
+					th:field="*{age}" id="age" class="form-control"
+					placeholder="Enter Student Age" min="1" required />
+			</div>
+			<div class="text-center">
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</form>
+	</div>
+	<script>
+		// Custom JavaScript for Form Validation
+		document.getElementById('studentForm').addEventListener('submit',
+				function(event) {
+					const age = document.getElementById('age').value;
+					if (age <= 0) {
+						event.preventDefault();
+						alert('Age must be greater than 0');
+						return false;
+					}
+					alert('Form updated successfully!');
+				});
+	</script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+rMBPtzECiJ6iIsbM9Y9pF5rmFhKnLrN9E/WHq5ZcvvoDJUrB"
+		crossorigin="anonymous"></script>
+</body>
+</html>
